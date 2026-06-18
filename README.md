@@ -26,8 +26,42 @@ AstroNexus pulls live data from public space agencies and science APIs, normaliz
 
 - [Feature Documentation](./docs/FEATURES.md) — full feature breakdown, data sources, tiers
 - [Architecture](./docs/ARCHITECTURE.md) — tech stack and system design
-- [API Reference](./docs/API.md) — public API endpoints (planned)
+- [API Reference](./docs/API.md) — public API endpoints
+
+## Quick start
+
+```bash
+npm install
+cp .env.example .env.local   # optional: add a free NASA_API_KEY to avoid DEMO_KEY rate limits
+npm run dev                  # http://localhost:3000
+```
+
+Build / run production:
+
+```bash
+npm run build && npm start
+```
 
 ## Status
 
-📝 **Planning** — feature documentation complete. Implementation not yet started.
+🛠️ **MVP live** — Next.js (App Router) + TypeScript + Tailwind. All six dashboards
+plus the daily APOD highlight are implemented against live public space APIs,
+proxied and cached server-side.
+
+| Module | Route | Data source | Status |
+|--------|-------|-------------|--------|
+| Mission Control dashboard | `/dashboard` | aggregate | ✅ |
+| Space Weather Center | `/space-weather` | NOAA SWPC | ✅ |
+| NEO Tracker | `/asteroids` | NASA NeoWs | ✅ |
+| Satellite & ISS Tracker | `/satellites` | wheretheiss.at | ✅ live ISS (passes need N2YO key) |
+| Launch Calendar | `/launches` | Launch Library 2 | ✅ |
+| Space News | `/news` | Spaceflight News API | ✅ |
+| Exoplanet Explorer | `/exoplanets` | NASA Exoplanet Archive | ✅ |
+| Picture of the Day | dashboard | NASA APOD | ✅ |
+| Pricing | `/pricing` | — | ✅ |
+| Public JSON API | `/api/*` | proxy + cache | ✅ |
+
+**Not yet implemented** (need external accounts/keys — see roadmap in
+[FEATURES.md](./docs/FEATURES.md) §7): auth & accounts (Supabase/Clerk),
+Postgres persistence, the alert engine + notifications (email/push/SMS/webhook),
+Stripe billing & tier gating, and satellite pass predictions (N2YO).
