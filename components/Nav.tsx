@@ -12,7 +12,6 @@ const links = [
   { href: "/launches", label: "Launches" },
   { href: "/news", label: "News" },
   { href: "/exoplanets", label: "Exoplanets" },
-  { href: "/pricing", label: "Pricing" },
 ];
 
 export function Nav() {

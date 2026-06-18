@@ -58,7 +58,6 @@ proxied and cached server-side.
 | Space News | `/news` | Spaceflight News API | ✅ |
 | Exoplanet Explorer | `/exoplanets` | NASA Exoplanet Archive | ✅ |
 | Picture of the Day | dashboard | NASA APOD | ✅ |
-| Pricing | `/pricing` | — | ✅ |
 | Public JSON API | `/api/*` | proxy + cache | ✅ |
 
 **Not yet implemented** (need external accounts/keys — see roadmap in

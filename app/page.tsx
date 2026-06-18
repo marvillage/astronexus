@@ -35,10 +35,10 @@ export default function Home() {
             Open the dashboard →
           </Link>
           <Link
-            href="/pricing"
+            href="/launches"
             className="rounded-xl border border-white/15 px-6 py-3 font-semibold text-slate-200 transition hover:bg-white/5"
           >
-            View pricing
+            See upcoming launches
           </Link>
         </div>
       </section>
@@ -62,10 +62,10 @@ export default function Home() {
           overhead, or before a launch you’re tracking — across in-app, email, push and SMS.
         </p>
         <Link
-          href="/pricing"
+          href="/dashboard"
           className="mt-6 inline-block rounded-xl bg-nebula px-6 py-3 font-semibold text-white transition hover:bg-nebula-light"
         >
-          See plans
+          Explore the dashboard
         </Link>
       </section>
     </div>
