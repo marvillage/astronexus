@@ -1,5 +1,6 @@
 import { getSpaceWeather } from "@/lib/sources/spaceWeather";
 import { PageHeader } from "@/components/PageHeader";
+import { SunHero } from "@/components/visuals/SunHero";
 import { fmtNumber, fmtDate } from "@/lib/format";
 
 export const revalidate = 300;
@@ -49,11 +50,11 @@ export default async function SpaceWeatherPage() {
 
   return (
     <div>
-      <PageHeader
-        icon="🌞"
-        title="Space Weather Center"
-        subtitle="Real-time solar and geomagnetic activity monitoring."
-        source="NOAA Space Weather Prediction Center"
+      <SunHero
+        kp={fmtNumber(sw.kpNow, 1)}
+        windSpeed={fmtNumber(sw.solarWindSpeed, 0)}
+        scale={sw.kpScale}
+        aurora={sw.auroraChance}
       />
 
       <div className="grid gap-5 lg:grid-cols-3">
@@ -76,10 +77,12 @@ export default async function SpaceWeatherPage() {
           <p className="text-xs text-slate-600">Updated {fmtDate(sw.updated)}</p>
         </div>
 
-        <div className="card flex flex-col items-center justify-center gap-3 p-6 text-center">
-          <div className="text-5xl">{sw.auroraChance === "Low" ? "🌌" : "✨"}</div>
-          <div className="text-lg font-semibold text-white">Will I see aurora tonight?</div>
-          <p className="text-sm text-slate-400">
+        <div className="card relative flex flex-col items-center justify-center gap-3 overflow-hidden p-6 text-center">
+          <div className="aurora-band" aria-hidden />
+          <div className="aurora-band" aria-hidden />
+          <div className="anim-float relative text-5xl">{sw.auroraChance === "Low" ? "🌌" : "✨"}</div>
+          <div className="relative text-lg font-semibold text-white">Will I see aurora tonight?</div>
+          <p className="relative text-sm text-slate-400">
             At Kp {fmtNumber(sw.kpNow, 1)}, aurora visibility is{" "}
             <span className="text-aurora">{sw.auroraChance.toLowerCase()}</span> at high latitudes.
             Set a custom Kp alert to get notified.

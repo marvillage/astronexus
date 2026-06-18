@@ -1,5 +1,5 @@
 import { getNeoFeed, type Neo } from "@/lib/sources/neo";
-import { PageHeader } from "@/components/PageHeader";
+import { OrbitHero } from "@/components/visuals/OrbitHero";
 import { fmtNumber, fmtDate } from "@/lib/format";
 
 export const revalidate = 1800;
@@ -17,22 +17,11 @@ export default async function AsteroidsPage() {
 
   return (
     <div>
-      <PageHeader
-        icon="☄️"
-        title="Near-Earth Object Tracker"
-        subtitle="Asteroid close approaches over the next 7 days, sorted by miss distance."
-        source="NASA NeoWs (Near-Earth Object Web Service)"
+      <OrbitHero
+        tracked={neos.length}
+        hazardous={hazardous}
+        closest={closest ? `${fmtNumber(closest.missDistanceLunar, 1)} LD` : "—"}
       />
-
-      <div className="mb-6 grid gap-4 sm:grid-cols-3">
-        <Stat label="Objects tracked" value={fmtNumber(neos.length)} icon="🪨" />
-        <Stat label="Potentially hazardous" value={fmtNumber(hazardous)} icon="⚠️" danger={hazardous > 0} />
-        <Stat
-          label="Closest approach"
-          value={closest ? `${fmtNumber(closest.missDistanceLunar, 1)} LD` : "—"}
-          icon="🎯"
-        />
-      </div>
 
       {neos.length === 0 ? (
         <p className="card p-8 text-center text-slate-400">NEO data is temporarily unavailable.</p>
@@ -84,26 +73,6 @@ export default async function AsteroidsPage() {
         </div>
       )}
       <p className="mt-3 text-xs text-slate-600">LD = Lunar Distance (~384,400 km).</p>
-    </div>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  icon,
-  danger,
-}: {
-  label: string;
-  value: string;
-  icon: string;
-  danger?: boolean;
-}) {
-  return (
-    <div className="card p-5">
-      <div className="text-2xl">{icon}</div>
-      <div className={`mt-2 text-3xl font-bold ${danger ? "text-red-300" : "text-white"}`}>{value}</div>
-      <div className="text-sm text-slate-400">{label}</div>
     </div>
   );
 }

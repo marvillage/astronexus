@@ -12,13 +12,22 @@ const pillars = [
 export default function Home() {
   return (
     <div className="space-y-20">
-      <section className="pt-12 text-center sm:pt-20">
+      <section className="relative pt-12 text-center sm:pt-20">
+        <div className="anim-float-slow pointer-events-none absolute -right-4 top-0 text-6xl opacity-70 sm:right-8 sm:text-8xl">
+          🪐
+        </div>
+        <div
+          className="anim-float pointer-events-none absolute left-2 top-24 text-4xl opacity-50 sm:left-10 sm:text-5xl"
+          style={{ animationDelay: "1.2s" }}
+        >
+          🛰️
+        </div>
         <span className="inline-block rounded-full border border-nebula/30 bg-nebula/10 px-4 py-1 text-sm text-nebula-light">
           The unified space intelligence platform
         </span>
         <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl">
           Everything happening{" "}
-          <span className="bg-gradient-to-r from-nebula-light via-comet to-aurora bg-clip-text text-transparent">
+          <span className="anim-gradient bg-gradient-to-r from-nebula-light via-comet to-aurora bg-clip-text text-transparent">
             above us
           </span>
           , in one dashboard.
@@ -45,9 +54,16 @@ export default function Home() {
 
       <section>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {pillars.map((p) => (
-            <Link key={p.title} href={p.href} className="card card-hover p-6">
-              <div className="text-3xl">{p.icon}</div>
+          {pillars.map((p, i) => (
+            <Link
+              key={p.title}
+              href={p.href}
+              className="card card-hover anim-fade-up p-6"
+              style={{ animationDelay: `${i * 0.08}s` }}
+            >
+              <div className="anim-float text-4xl" style={{ animationDelay: `${i * 0.4}s` }}>
+                {p.icon}
+              </div>
               <h3 className="mt-3 text-lg font-semibold text-white">{p.title}</h3>
               <p className="mt-1 text-sm text-slate-400">{p.desc}</p>
             </Link>
